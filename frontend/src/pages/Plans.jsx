@@ -49,14 +49,16 @@ export default function Plans() {
           {plans.map((p) => {
             const isActive = active === p.id;
             return (
-              <button
+              <div
                 key={p.id}
+                role="button"
+                tabIndex={0}
                 data-testid={`plan-${p.tier.toLowerCase()}`}
                 onClick={() => setActive(p.id)}
-                className={`w-full text-left rounded-2xl border transition-all duration-300 p-4 ${
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(p.id); } }}
+                className={`w-full text-left rounded-2xl border transition-all duration-300 p-4 cursor-pointer outline-none focus:ring-2 focus:ring-black/30 ${
                   isActive ? "border-transparent" : "border-black/10 bg-[var(--nova-peach-light)] hover:bg-[var(--nova-peach)]"
                 }`}
-                style={isActive ? {} : {}}
               >
                 {isActive ? (
                   <div className="plan-highlight rounded-2xl p-4 -m-4 relative overflow-hidden">
@@ -100,7 +102,7 @@ export default function Plans() {
                     </div>
                   </div>
                 )}
-              </button>
+              </div>
             );
           })}
         </div>
