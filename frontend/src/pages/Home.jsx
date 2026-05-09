@@ -80,18 +80,18 @@ export default function Home() {
         <DiscountsCarousel />
 
         <Section title="browse services" cta="see all" testid="services-section">
-          <div className="flex gap-2.5 overflow-x-auto scrollbar-hide pb-1 -mx-5 px-5 snap-x">
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1 -mx-5 px-5 snap-x">
             {services.map((s, i) => (
               <button
                 key={s.id}
                 data-testid={`service-${s.id}`}
-                className="shrink-0 snap-start w-36 surface rounded-2xl p-3.5 text-left hover:-translate-y-0.5 transition-transform"
+                className="shrink-0 snap-start w-52 surface rounded-3xl p-5 text-left hover:-translate-y-0.5 transition-transform"
               >
-                <div className={`w-9 h-9 rounded-full grid place-items-center mb-3 ${i % 3 === 0 ? "bg-[var(--cred-lime)] text-black" : "bg-white/10 text-white"}`}>
-                  <Sparkles size={16} />
+                <div className={`w-12 h-12 rounded-2xl grid place-items-center mb-4 ${i % 3 === 0 ? "bg-[var(--cred-lime)] text-black" : "bg-white/10 text-white"}`}>
+                  <Sparkles size={20} />
                 </div>
-                <p className="text-[14px] font-extrabold leading-tight text-white">{s.title}</p>
-                <p className="text-[11px] text-white/55 mt-1.5 leading-snug">{s.blurb}</p>
+                <p className="text-[18px] font-extrabold leading-tight text-white">{s.title}</p>
+                <p className="text-[12px] text-white/55 mt-2 leading-snug">{s.blurb}</p>
               </button>
             ))}
           </div>
