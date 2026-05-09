@@ -8,7 +8,7 @@ export default function PhoneFrame({ children, padding = true }) {
         <div className="pt-2">
           <div className="notch" />
         </div>
-        <div className={`flex-1 flex flex-col ${padding ? "px-5 pt-4 pb-2" : ""}`}>
+        <div className={`flex-1 flex flex-col ${padding ? "px-5 pt-5 pb-2" : ""}`}>
           {children}
         </div>
         <BottomNav />
