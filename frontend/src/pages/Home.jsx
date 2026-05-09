@@ -3,6 +3,7 @@ import axios from "axios";
 import PhoneFrame from "../components/PhoneFrame";
 import ProfileDrawer from "../components/ProfileDrawer";
 import DiscountsCarousel from "../components/DiscountsCarousel";
+import PaymentsSection from "../components/PaymentsSection";
 import { Bell, Sparkles, ArrowUpRight, Quote, TrendingUp } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -98,21 +99,21 @@ export default function Home() {
         </Section>
 
         <Section title="industries we serve" testid="industries-section">
-          <div className="-mx-5">
-            <div className="marquee marquee-left mb-3">
-              <div className="marquee-track">
-                {[...industries, ...industries].map((it, i) => (
-                  <IndustryCard key={`a-${i}`} item={it} idx={i} />
-                ))}
-              </div>
-            </div>
-            <div className="marquee marquee-right">
-              <div className="marquee-track marquee-track-rev">
-                {[...industries.slice().reverse(), ...industries.slice().reverse()].map((it, i) => (
-                  <IndustryCard key={`b-${i}`} item={it} idx={i} />
-                ))}
-              </div>
-            </div>
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-5 px-5 snap-x">
+            {industries.map((it) => (
+              <a
+                key={it.id}
+                data-testid={`industry-${it.id}`}
+                className="industry-pill snap-start shrink-0"
+              >
+                <img src={it.image} alt={it.name} className="industry-pill-img" />
+                <div className="industry-pill-shade" />
+                <div className="industry-pill-body">
+                  <p className="industry-pill-name">{it.name}</p>
+                  <p className="industry-pill-tag">{it.tagline}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </Section>
 
@@ -205,21 +206,7 @@ function Stat({ n, l }) {
   );
 }
 
-function IndustryCard({ item, idx }) {
-  const accent = idx % 3 === 0;
-  return (
-    <div
-      data-testid={`industry-${item.id}`}
-      className={`shrink-0 mx-1.5 w-44 h-36 rounded-3xl grid place-items-center surface relative overflow-hidden ${accent ? "ring-1 ring-[var(--cred-lime)]/30" : ""}`}
-    >
-      <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-[var(--cred-lime)] opacity-10 blur-2xl" />
-      <div className="text-center relative px-3">
-        <div className="text-[10px] uppercase tracking-[0.35em] text-white/40 font-mono">industry</div>
-        <div className="text-2xl font-extrabold mt-2 text-white font-display tracking-tight">{item.name}</div>
-      </div>
-    </div>
-  );
-}
+function IndustryCard() { return null; /* legacy, replaced by inline pill */ }
 
 function Section({ title, cta, children, testid }) {
   return (

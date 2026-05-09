@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PhoneFrame from "../components/PhoneFrame";
 import { ArrowRight, Mic, Sparkles } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Splash() {
   const navigate = useNavigate();
   const [q, setQ] = useState("");
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (!user) navigate("/welcome", { replace: true });
+      else if (!user.onboarded) navigate("/onboarding", { replace: true });
+    }, 1800);
+    return () => clearTimeout(t);
+  }, [user, navigate]);
 
   return (
     <PhoneFrame>

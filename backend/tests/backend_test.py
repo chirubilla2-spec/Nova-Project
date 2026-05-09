@@ -25,7 +25,20 @@ def test_services(client):
 def test_industries(client):
     r = client.get(f"{API}/industries")
     assert r.status_code == 200
-    assert len(r.json()) == 6
+    data = r.json()
+    assert len(data) == 8
+    for it in data:
+        assert "id" in it and "name" in it and "icon" in it
+        assert "tagline" in it and isinstance(it["tagline"], str) and it["tagline"]
+        assert "image" in it and isinstance(it["image"], str) and it["image"].startswith("http")
+
+def test_discounts(client):
+    r = client.get(f"{API}/discounts")
+    assert r.status_code == 200
+    data = r.json()
+    assert len(data) == 5
+    for d in data:
+        assert all(k in d for k in ["id", "code", "title", "description", "note", "accent"])
 
 def test_testimonials(client):
     r = client.get(f"{API}/testimonials")

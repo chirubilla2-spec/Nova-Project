@@ -3,6 +3,7 @@ import axios from "axios";
 import PhoneFrame from "../components/PhoneFrame";
 import { Check, Sparkles, Lock, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
+import { useAuth } from "../context/AuthContext";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -10,6 +11,7 @@ export default function Plans() {
   const [plans, setPlans] = useState([]);
   const [active, setActive] = useState(null);
   const [paying, setPaying] = useState(false);
+  const { recordPayment } = useAuth();
 
   useEffect(() => {
     axios.get(`${API}/plans`).then((r) => {
@@ -24,6 +26,8 @@ export default function Plans() {
     setPaying(true);
     try {
       const { data } = await axios.post(`${API}/payments`, { plan_id: active });
+      const tier = plans.find((p) => p.id === active)?.tier;
+      recordPayment({ ...data, tier });
       toast.success(`payment ${data.status} · $${data.amount}`);
     } catch {
       toast.error("payment failed");

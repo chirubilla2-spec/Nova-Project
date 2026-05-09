@@ -36,6 +36,8 @@ class Industry(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     icon: str
+    tagline: str = ""
+    image: str = ""
 
 class Testimonial(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -110,12 +112,14 @@ SEED_SERVICES = [
 ]
 
 SEED_INDUSTRIES = [
-    {"id": "i1", "name": "Fintech", "icon": "banknote"},
-    {"id": "i2", "name": "Healthcare", "icon": "heart-pulse"},
-    {"id": "i3", "name": "Retail", "icon": "shopping-bag"},
-    {"id": "i4", "name": "Education", "icon": "graduation-cap"},
-    {"id": "i5", "name": "Real Estate", "icon": "building-2"},
-    {"id": "i6", "name": "Travel", "icon": "plane"},
+    {"id": "i1", "name": "Manufacturing", "icon": "factory", "tagline": "Get More Leads", "image": "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=600"},
+    {"id": "i2", "name": "Retail", "icon": "shopping-bag", "tagline": "Connect with B2C Audience", "image": "https://images.unsplash.com/photo-1481437156560-3205f6a55735?w=600"},
+    {"id": "i3", "name": "Financial Services", "icon": "trending-up", "tagline": "Build Trust. Automate Growth.", "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600"},
+    {"id": "i4", "name": "E-commerce", "icon": "shopping-cart", "tagline": "Convert Faster", "image": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600"},
+    {"id": "i5", "name": "Real Estate", "icon": "building-2", "tagline": "Digitize. Engage. Close.", "image": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600"},
+    {"id": "i6", "name": "SaaS", "icon": "monitor", "tagline": "Ship Faster. Retain Longer.", "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600"},
+    {"id": "i7", "name": "Healthcare", "icon": "heart-pulse", "tagline": "Care, Made Smarter.", "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600"},
+    {"id": "i8", "name": "Education", "icon": "graduation-cap", "tagline": "Teach. Track. Transform.", "image": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600"},
 ]
 
 SEED_TESTIMONIALS = [
