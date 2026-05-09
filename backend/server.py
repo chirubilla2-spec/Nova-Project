@@ -68,6 +68,15 @@ class PortfolioItem(BaseModel):
     category: str
     cover: str
 
+class Discount(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    code: str
+    title: str
+    description: str
+    note: str
+    accent: str
+
 class Profile(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = "novacnkt-user"
@@ -149,6 +158,14 @@ SEED_PROFILE = {
     "verified": True,
 }
 
+SEED_DISCOUNTS = [
+    {"id": "d1", "code": "FLASH125", "title": "Get upto 125 off on spends above Rs.2000", "description": "Get upto ₹125 off on spends above ₹2000", "note": "Applicable for one time", "accent": "lime"},
+    {"id": "d2", "code": "NOVA50", "title": "Flat 50% off on Standard plan", "description": "Lock in NOVA Standard for half the price.", "note": "Limited time · ends Sunday", "accent": "violet"},
+    {"id": "d3", "code": "FIRSTBRAND", "title": "Free brand audit on first invoice", "description": "Audit + roadmap delivered in 48 hours.", "note": "New customers only", "accent": "lime"},
+    {"id": "d4", "code": "REFER300", "title": "₹300 credits per successful referral", "description": "Refer a founder, both of you earn.", "note": "Stackable up to 5×", "accent": "amber"},
+    {"id": "d5", "code": "AI100", "title": "100 AI Studio credits free", "description": "Try the NOVA AI Studio for a month, on us.", "note": "One redemption per workspace", "accent": "violet"},
+]
+
 
 # --------- Routes ----------
 @api_router.get("/")
@@ -182,6 +199,10 @@ async def get_portfolio():
 @api_router.get("/profile", response_model=Profile)
 async def get_profile():
     return SEED_PROFILE
+
+@api_router.get("/discounts", response_model=List[Discount])
+async def get_discounts():
+    return SEED_DISCOUNTS
 
 @api_router.post("/payments", response_model=PaymentResponse)
 async def create_payment(req: PaymentRequest):
