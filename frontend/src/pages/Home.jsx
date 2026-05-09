@@ -56,8 +56,7 @@ export default function Home() {
           <div className="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-[var(--cred-lime)] opacity-15 blur-3xl" />
           <div className="absolute -left-12 -bottom-16 w-44 h-44 rounded-full bg-[var(--cred-violet)] opacity-25 blur-3xl" />
           <div className="relative">
-            <p className="text-[10px] tracking-[0.3em] text-white/45 font-mono">NOVACNKT · BUSINESS VERTICAL</p>
-            <h2 className="font-display text-[34px] font-extrabold tracking-tight mt-1.5 leading-[0.95] text-white">
+            <h2 className="font-display text-[34px] font-extrabold tracking-tight leading-[0.95] text-white">
               build with <span className="font-serif-i text-[var(--cred-lime)]">intent</span>.<br />
               ship with nova<span className="text-[var(--cred-lime)]">.</span>
             </h2>
@@ -81,38 +80,39 @@ export default function Home() {
         <DiscountsCarousel />
 
         <Section title="browse services" cta="see all" testid="services-section">
-          <div className="grid grid-cols-3 gap-2.5">
-            {services.slice(0, 6).map((s, i) => (
+          <div className="flex gap-2.5 overflow-x-auto scrollbar-hide pb-1 -mx-5 px-5 snap-x">
+            {services.map((s, i) => (
               <button
                 key={s.id}
                 data-testid={`service-${s.id}`}
-                className="surface rounded-2xl p-3 text-left hover:-translate-y-0.5 transition-transform group"
+                className="shrink-0 snap-start w-36 surface rounded-2xl p-3.5 text-left hover:-translate-y-0.5 transition-transform"
               >
-                <div className={`w-7 h-7 rounded-lg grid place-items-center mb-2 ${i % 3 === 0 ? "bg-[var(--cred-lime)] text-black" : "bg-white/10 text-white"}`}>
-                  <Sparkles size={14} />
+                <div className={`w-9 h-9 rounded-full grid place-items-center mb-3 ${i % 3 === 0 ? "bg-[var(--cred-lime)] text-black" : "bg-white/10 text-white"}`}>
+                  <Sparkles size={16} />
                 </div>
-                <p className="text-[12px] font-bold leading-tight text-white">{s.title}</p>
-                <p className="text-[10px] text-white/50 mt-0.5">{s.blurb}</p>
+                <p className="text-[14px] font-extrabold leading-tight text-white">{s.title}</p>
+                <p className="text-[11px] text-white/55 mt-1.5 leading-snug">{s.blurb}</p>
               </button>
             ))}
           </div>
         </Section>
 
         <Section title="industries we serve" testid="industries-section">
-          <div className="flex gap-2.5 overflow-x-auto scrollbar-hide pb-1 -mx-5 px-5">
-            {industries.map((it, i) => (
-              <div
-                key={it.id}
-                data-testid={`industry-${it.id}`}
-                className={`shrink-0 w-32 h-28 rounded-2xl grid place-items-center surface relative overflow-hidden ${i === 0 ? "ring-1 ring-[var(--cred-lime)]/40" : ""}`}
-              >
-                <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-[var(--cred-lime)] opacity-10 blur-xl" />
-                <div className="text-center relative">
-                  <div className="text-[9px] uppercase tracking-[0.3em] text-white/40 font-mono">industry</div>
-                  <div className="text-base font-bold mt-1 text-white font-display">{it.name}</div>
-                </div>
+          <div className="-mx-5">
+            <div className="marquee marquee-left mb-3">
+              <div className="marquee-track">
+                {[...industries, ...industries].map((it, i) => (
+                  <IndustryCard key={`a-${i}`} item={it} idx={i} />
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="marquee marquee-right">
+              <div className="marquee-track marquee-track-rev">
+                {[...industries.slice().reverse(), ...industries.slice().reverse()].map((it, i) => (
+                  <IndustryCard key={`b-${i}`} item={it} idx={i} />
+                ))}
+              </div>
+            </div>
           </div>
         </Section>
 
@@ -136,16 +136,16 @@ export default function Home() {
         <Section title="testimonials" testid="testimonials-section">
           <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-5 px-5 pb-1">
             {testimonials.map((t) => (
-              <div key={t.id} data-testid={`testimonial-${t.id}`} className="shrink-0 w-72 surface-strong rounded-2xl p-4">
-                <Quote size={16} className="text-[var(--cred-lime)]" />
-                <p className="text-sm leading-snug mt-2 text-white/90 font-serif-i">"{t.quote}"</p>
+              <div key={t.id} data-testid={`testimonial-${t.id}`} className="shrink-0 w-72 rounded-2xl p-4 bg-white text-[#0a0a0e] border border-black/10 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.5)]">
+                <Quote size={16} className="text-[#caa215]" fill="currentColor" />
+                <p className="text-sm leading-snug mt-2 font-serif-i">"{t.quote}"</p>
                 <div className="flex items-center gap-2 mt-3">
-                  <img src={t.avatar} alt="" className="w-8 h-8 rounded-full object-cover border border-white/10" />
+                  <img src={t.avatar} alt="" className="w-8 h-8 rounded-full object-cover border border-black/10" />
                   <div>
-                    <p className="text-[12px] font-semibold leading-tight text-white">{t.name}</p>
-                    <p className="text-[10px] text-white/50 font-mono">{t.role}</p>
+                    <p className="text-[12px] font-semibold leading-tight">{t.name}</p>
+                    <p className="text-[10px] text-black/55 font-mono">{t.role}</p>
                   </div>
-                  <TrendingUp size={14} className="ml-auto text-[var(--cred-lime)]" />
+                  <TrendingUp size={14} className="ml-auto text-[#caa215]" />
                 </div>
               </div>
             ))}
@@ -170,15 +170,20 @@ export default function Home() {
         </Section>
 
         <Section title="blogs & case studies" testid="blogs-section">
-          <div className="grid grid-cols-3 gap-2.5">
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-5 px-5 pb-1 snap-x">
             {blogs.map((b) => (
-              <a key={b.id} data-testid={`blog-${b.id}`} className="block surface rounded-2xl overflow-hidden hover:-translate-y-0.5 transition-transform">
-                <div className="aspect-[4/3] bg-white/5 overflow-hidden">
+              <a
+                key={b.id}
+                data-testid={`blog-${b.id}`}
+                className="shrink-0 snap-start w-[64%] surface rounded-2xl overflow-hidden hover:-translate-y-0.5 transition-transform"
+              >
+                <div className="aspect-[16/10] bg-white/5 overflow-hidden">
                   {b.cover && <img src={b.cover} alt="" className="w-full h-full object-cover opacity-90" />}
                 </div>
-                <div className="p-2">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--cred-lime)] font-mono">{b.tag}</p>
-                  <p className="text-[12px] font-semibold leading-tight mt-0.5 line-clamp-2 text-white">{b.title}</p>
+                <div className="p-3">
+                  <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--cred-lime)] font-mono">{b.tag}</p>
+                  <p className="text-[14px] font-extrabold leading-tight mt-1 line-clamp-2 text-white">{b.title}</p>
+                  <p className="text-[11px] text-white/55 mt-1.5 line-clamp-2 leading-snug">{b.excerpt}</p>
                 </div>
               </a>
             ))}
@@ -196,6 +201,22 @@ function Stat({ n, l }) {
     <div>
       <p className="font-display text-2xl font-extrabold tracking-tight">{n}</p>
       <p className="text-[10px] uppercase tracking-[0.2em] text-white/45 font-mono">{l}</p>
+    </div>
+  );
+}
+
+function IndustryCard({ item, idx }) {
+  const accent = idx % 3 === 0;
+  return (
+    <div
+      data-testid={`industry-${item.id}`}
+      className={`shrink-0 mx-1.5 w-44 h-36 rounded-3xl grid place-items-center surface relative overflow-hidden ${accent ? "ring-1 ring-[var(--cred-lime)]/30" : ""}`}
+    >
+      <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-[var(--cred-lime)] opacity-10 blur-2xl" />
+      <div className="text-center relative px-3">
+        <div className="text-[10px] uppercase tracking-[0.35em] text-white/40 font-mono">industry</div>
+        <div className="text-2xl font-extrabold mt-2 text-white font-display tracking-tight">{item.name}</div>
+      </div>
     </div>
   );
 }

@@ -40,16 +40,6 @@ export default function ProfileDrawer({ profile, trigger }) {
               <p className="text-xs text-white/55">{profile?.business}</p>
             </div>
           </div>
-
-          <div className="mt-4 surface rounded-2xl p-3 flex items-center justify-between">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-white/45">CRED COINS</p>
-              <p className="font-display text-2xl font-extrabold text-[var(--cred-lime)]">28,540</p>
-            </div>
-            <button onClick={() => toast("Redeem coming soon")} className="cta-lime rounded-full px-4 py-2 text-xs uppercase tracking-widest">
-              Redeem
-            </button>
-          </div>
         </SheetHeader>
 
         <div className="p-3" data-testid="profile-menu">
