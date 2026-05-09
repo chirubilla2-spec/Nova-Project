@@ -10,12 +10,12 @@ export default function AIOrb({ size = 84, className = "", thinking = false }) {
         <defs>
           <radialGradient id="orbCore" cx="50%" cy="40%" r="50%">
             <stop offset="0%" stopColor="#f5ffd5" />
-            <stop offset="40%" stopColor="#d4ff54" />
+            <stop offset="40%" stopColor="#ffd93d" />
             <stop offset="100%" stopColor="#5a7a14" />
           </radialGradient>
           <radialGradient id="orbHalo" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(212,255,84,0.55)" />
-            <stop offset="100%" stopColor="rgba(212,255,84,0)" />
+            <stop offset="0%" stopColor="rgba(255,217,61,0.55)" />
+            <stop offset="100%" stopColor="rgba(255,217,61,0)" />
           </radialGradient>
           <filter id="orbBlur" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="2" />
@@ -29,7 +29,7 @@ export default function AIOrb({ size = 84, className = "", thinking = false }) {
         </circle>
 
         {/* ripple rings */}
-        <circle cx="50" cy="50" r="20" fill="none" stroke="rgba(212,255,84,0.5)" strokeWidth="0.6">
+        <circle cx="50" cy="50" r="20" fill="none" stroke="rgba(255,217,61,0.5)" strokeWidth="0.6">
           <animate attributeName="r" values="20;42" dur={thinking ? "1.2s" : "2.4s"} repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.6;0" dur={thinking ? "1.2s" : "2.4s"} repeatCount="indefinite" />
         </circle>
@@ -40,7 +40,7 @@ export default function AIOrb({ size = 84, className = "", thinking = false }) {
 
         {/* orbiting dots */}
         <g style={{ transformOrigin: "50px 50px", animation: "orb-rotate 6s linear infinite" }}>
-          <circle cx="50" cy="14" r="1.4" fill="#d4ff54" filter="url(#orbBlur)" />
+          <circle cx="50" cy="14" r="1.4" fill="#ffd93d" filter="url(#orbBlur)" />
         </g>
         <g style={{ transformOrigin: "50px 50px", animation: "orb-rotate-rev 8s linear infinite" }}>
           <circle cx="50" cy="86" r="1.1" fill="#6b5cff" filter="url(#orbBlur)" />

@@ -14,8 +14,8 @@ export default function VaultAnimation({ size = 160, className = "" }) {
             <stop offset="100%" stopColor="#07070a" />
           </radialGradient>
           <linearGradient id="vaultRim" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#d4ff54" stopOpacity="0.9" />
-            <stop offset="50%" stopColor="#d4ff54" stopOpacity="0.15" />
+            <stop offset="0%" stopColor="#ffd93d" stopOpacity="0.9" />
+            <stop offset="50%" stopColor="#ffd93d" stopOpacity="0.15" />
             <stop offset="100%" stopColor="#6b5cff" stopOpacity="0.6" />
           </linearGradient>
           <linearGradient id="dial" x1="0" y1="0" x2="0" y2="1">
@@ -41,7 +41,7 @@ export default function VaultAnimation({ size = 160, className = "" }) {
 
         {/* counter-rotate inner ring */}
         <g style={{ transformOrigin: "100px 100px", animation: "vault-rotate-rev 26s linear infinite" }}>
-          <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(212,255,84,0.22)" strokeWidth="0.8" strokeDasharray="1 4" />
+          <circle cx="100" cy="100" r="62" fill="none" stroke="rgba(255,217,61,0.22)" strokeWidth="0.8" strokeDasharray="1 4" />
         </g>
 
         {/* tick marks every 30deg */}
@@ -60,7 +60,7 @@ export default function VaultAnimation({ size = 160, className = "" }) {
 
         {/* dial body */}
         <circle cx="100" cy="100" r="46" fill="url(#dial)" stroke="rgba(255,255,255,0.10)" />
-        <circle cx="100" cy="100" r="46" fill="none" stroke="rgba(212,255,84,0.10)" filter="url(#glow)" />
+        <circle cx="100" cy="100" r="46" fill="none" stroke="rgba(255,217,61,0.10)" filter="url(#glow)" />
 
         {/* spokes */}
         <g style={{ transformOrigin: "100px 100px", animation: "vault-rotate 10s linear infinite" }}>
@@ -72,21 +72,21 @@ export default function VaultAnimation({ size = 160, className = "" }) {
               width="3"
               height="14"
               rx="1.5"
-              fill="rgba(212,255,84,0.85)"
+              fill="rgba(255,217,61,0.85)"
               transform={`rotate(${deg} 100 100)`}
             />
           ))}
         </g>
 
         {/* center hub */}
-        <circle cx="100" cy="100" r="14" fill="#0a0a0e" stroke="#d4ff54" strokeWidth="1.2" />
-        <circle cx="100" cy="100" r="4" fill="#d4ff54">
+        <circle cx="100" cy="100" r="14" fill="#0a0a0e" stroke="#ffd93d" strokeWidth="1.2" />
+        <circle cx="100" cy="100" r="4" fill="#ffd93d">
           <animate attributeName="r" values="3;5;3" dur="2.2s" repeatCount="indefinite" />
         </circle>
 
         {/* orbiting spark */}
         <g style={{ transformOrigin: "100px 100px", animation: "vault-rotate 6s linear infinite" }}>
-          <circle cx="100" cy="22" r="2.5" fill="#d4ff54" filter="url(#glow)" />
+          <circle cx="100" cy="22" r="2.5" fill="#ffd93d" filter="url(#glow)" />
         </g>
         <g style={{ transformOrigin: "100px 100px", animation: "vault-rotate-rev 8s linear infinite" }}>
           <circle cx="100" cy="178" r="1.8" fill="#6b5cff" filter="url(#glow)" />

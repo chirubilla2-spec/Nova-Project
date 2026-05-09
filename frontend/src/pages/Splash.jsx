@@ -17,21 +17,21 @@ export default function Splash() {
 
         <div className="flex-1 flex flex-col items-center justify-center text-center px-2">
           <div className="relative mb-8 fade-up">
-            <div className="absolute -inset-12 rounded-full bg-[radial-gradient(circle,rgba(212,255,84,0.25),transparent_60%)] blur-2xl glow-pulse" />
+            <div className="absolute -inset-12 rounded-full bg-[radial-gradient(circle,rgba(255,217,61,0.25),transparent_60%)] blur-2xl glow-pulse" />
             <svg viewBox="0 0 200 200" className="absolute -inset-6 w-[calc(100%+48px)] h-[calc(100%+48px)] pointer-events-none" aria-hidden>
               <defs>
                 <linearGradient id="splashRing" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#d4ff54" stopOpacity="0.9" />
-                  <stop offset="60%" stopColor="#d4ff54" stopOpacity="0.05" />
+                  <stop offset="0%" stopColor="#ffd93d" stopOpacity="0.9" />
+                  <stop offset="60%" stopColor="#ffd93d" stopOpacity="0.05" />
                   <stop offset="100%" stopColor="#6b5cff" stopOpacity="0.6" />
                 </linearGradient>
               </defs>
               <g style={{ transformOrigin: "100px 100px", animation: "vault-rotate 22s linear infinite" }}>
                 <circle cx="100" cy="100" r="92" fill="none" stroke="url(#splashRing)" strokeWidth="0.8" strokeDasharray="2 6" />
-                <circle cx="100" cy="8" r="2.4" fill="#d4ff54" />
+                <circle cx="100" cy="8" r="2.4" fill="#ffd93d" />
               </g>
               <g style={{ transformOrigin: "100px 100px", animation: "vault-rotate-rev 14s linear infinite" }}>
-                <circle cx="100" cy="100" r="76" fill="none" stroke="rgba(212,255,84,0.18)" strokeWidth="0.6" strokeDasharray="1 5" />
+                <circle cx="100" cy="100" r="76" fill="none" stroke="rgba(255,217,61,0.18)" strokeWidth="0.6" strokeDasharray="1 5" />
               </g>
             </svg>
             <div className="relative w-20 h-20 rounded-3xl surface-elevated grid place-items-center">

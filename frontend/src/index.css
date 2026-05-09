@@ -22,8 +22,8 @@ body {
     --cred-text: #f4f1ea;
     --cred-mute: rgba(244,241,234,0.62);
     --cred-mute-2: rgba(244,241,234,0.40);
-    --cred-lime: #d4ff54;
-    --cred-lime-deep: #b8ec2a;
+    --cred-lime: #ffd93d;
+    --cred-lime-deep: #f5b61b;
     --cred-violet: #6b5cff;
     --cred-amber: #ff9d4d;
     --cred-coral: #ff6f4a;
@@ -75,7 +75,7 @@ body {
 .phone-shell {
     min-height: 100dvh;
     background:
-        radial-gradient(900px 500px at 80% -10%, rgba(212,255,84,0.10), transparent 60%),
+        radial-gradient(900px 500px at 80% -10%, rgba(255,217,61,0.10), transparent 60%),
         radial-gradient(800px 600px at -10% 110%, rgba(107,92,255,0.18), transparent 55%),
         radial-gradient(600px 400px at 50% 50%, rgba(255,157,77,0.06), transparent 70%),
         #07070a;
@@ -105,7 +105,7 @@ body {
     border-radius: 42px;
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.05),
-        0 50px 120px -30px rgba(212,255,84,0.10),
+        0 50px 120px -30px rgba(255,217,61,0.10),
         0 30px 80px -20px rgba(107,92,255,0.18),
         0 1px 0 rgba(255,255,255,0.06);
     position: relative;
@@ -133,7 +133,7 @@ body {
 }
 .surface-strong {
     background:
-        radial-gradient(120% 100% at 0% 0%, rgba(212,255,84,0.06), transparent 50%),
+        radial-gradient(120% 100% at 0% 0%, rgba(255,217,61,0.06), transparent 50%),
         linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
     border: 1px solid var(--cred-line);
     border-radius: 22px;
@@ -151,16 +151,16 @@ body {
 
 /* Lime CTA — CRED signature */
 .cta-lime {
-    background: linear-gradient(180deg, #e6ff7d 0%, #d4ff54 50%, #b8ec2a 100%);
+    background: linear-gradient(180deg, #fff1a1 0%, #ffd93d 50%, #f5b61b 100%);
     color: #0a0a0e;
     font-weight: 800;
     box-shadow:
         0 1px 0 rgba(255,255,255,0.5) inset,
-        0 -2px 8px rgba(184,236,42,0.6) inset,
-        0 14px 30px -10px rgba(212,255,84,0.55);
+        0 -2px 8px rgba(245,182,27,0.6) inset,
+        0 14px 30px -10px rgba(255,217,61,0.55);
     transition: transform .25s ease, box-shadow .25s ease;
 }
-.cta-lime:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 -2px 8px rgba(184,236,42,0.6) inset, 0 18px 36px -10px rgba(212,255,84,0.7); }
+.cta-lime:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 -2px 8px rgba(245,182,27,0.6) inset, 0 18px 36px -10px rgba(255,217,61,0.7); }
 
 .cta-dark {
     background: linear-gradient(180deg, #1d1d24 0%, #101015 100%);
@@ -172,14 +172,14 @@ body {
 /* Premium plan card (replaces purple gradient) */
 .plan-premium {
     background:
-        radial-gradient(120% 100% at 0% 0%, rgba(212,255,84,0.18), transparent 55%),
+        radial-gradient(120% 100% at 0% 0%, rgba(255,217,61,0.18), transparent 55%),
         radial-gradient(100% 100% at 100% 100%, rgba(107,92,255,0.18), transparent 55%),
         linear-gradient(180deg, #14141a 0%, #0a0a0e 100%);
-    border: 1px solid rgba(212,255,84,0.25);
+    border: 1px solid rgba(255,217,61,0.25);
     color: #f4f1ea;
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.06),
-        0 30px 60px -20px rgba(212,255,84,0.18);
+        0 30px 60px -20px rgba(255,217,61,0.18);
     position: relative;
 }
 .plan-premium::before {
@@ -188,7 +188,7 @@ body {
     top: 0; left: -50%;
     width: 50%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #d4ff54, transparent);
+    background: linear-gradient(90deg, transparent, #ffd93d, transparent);
     animation: shimmer-sweep 3.4s ease-in-out infinite;
     pointer-events: none;
 }
