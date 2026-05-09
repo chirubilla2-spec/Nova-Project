@@ -78,6 +78,7 @@ export default function Home() {
       </div>
 
       <div className="overflow-y-auto scrollbar-hide flex-1 -mx-5 px-5 mt-2">
+        <PaymentsSection />
         <DiscountsCarousel />
 
         <Section title="browse services" cta="see all" testid="services-section">
