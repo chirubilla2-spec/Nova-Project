@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PhoneFrame from "../components/PhoneFrame";
 import ProfileDrawer from "../components/ProfileDrawer";
+import VaultAnimation from "../components/VaultAnimation";
 import { Bell, Sparkles, ArrowUpRight, Quote, TrendingUp } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -52,11 +53,13 @@ export default function Home() {
       {/* Hero — premium credit-card-like surface */}
       <div className="mt-5 fade-up" data-testid="home-hero">
         <div className="surface-elevated rounded-3xl p-5 relative overflow-hidden">
-          <div className="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-[var(--cred-lime)] opacity-15 blur-3xl" />
           <div className="absolute -left-12 -bottom-16 w-44 h-44 rounded-full bg-[var(--cred-violet)] opacity-25 blur-3xl" />
-          <div className="relative">
-            <p className="text-[10px] tracking-[0.3em] text-white/45 font-mono">NOVACNKT · BUSINESS VERTICAL</p>
-            <h2 className="font-display text-[34px] font-extrabold tracking-tight mt-1.5 leading-[0.95] text-white">
+          <div className="absolute -right-8 -top-6 opacity-90 pointer-events-none">
+            <VaultAnimation size={170} />
+          </div>
+          <div className="relative max-w-[62%]">
+            <p className="text-[10px] tracking-[0.3em] text-white/45 font-mono">NOVACNKT · VERTICAL</p>
+            <h2 className="font-display text-[30px] font-extrabold tracking-tight mt-1.5 leading-[0.95] text-white">
               build with <span className="font-serif-i text-[var(--cred-lime)]">intent</span>.<br />
               ship with nova<span className="text-[var(--cred-lime)]">.</span>
             </h2>
@@ -64,14 +67,14 @@ export default function Home() {
               <button className="cta-lime rounded-full px-4 py-2 text-xs uppercase tracking-[0.25em] flex items-center gap-1.5">
                 discover <ArrowUpRight size={12} />
               </button>
-              <button className="cta-dark rounded-full px-4 py-2 text-xs uppercase tracking-[0.25em]">watch reel</button>
+              <button className="cta-dark rounded-full px-4 py-2 text-xs uppercase tracking-[0.25em]">reel</button>
             </div>
-            <div className="divider-shine my-5" />
-            <div className="grid grid-cols-3 gap-3 text-white">
-              <Stat n="120+" l="projects" />
-              <Stat n="40" l="brands" />
-              <Stat n="4.9" l="rating" />
-            </div>
+          </div>
+          <div className="divider-shine my-5 relative" />
+          <div className="grid grid-cols-3 gap-3 text-white relative">
+            <Stat n="120+" l="projects" />
+            <Stat n="40" l="brands" />
+            <Stat n="4.9" l="rating" />
           </div>
         </div>
       </div>
