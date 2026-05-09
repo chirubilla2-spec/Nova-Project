@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Work+Sans:wght@600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: 'Manrope', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #faf7f2;
+}
+
+:root {
+    --nova-cream: #faf7f2;
+    --nova-peach: #f4b8a8;
+    --nova-peach-light: #ffd8c5;
+    --nova-peach-deep: #e89a87;
+    --nova-ink: #0a0a0a;
+    --nova-line: #111111;
+    --nova-purple-from: #4c1d95;
+    --nova-purple-to: #c026d3;
+}
+
+.font-display {
+    font-family: 'Work Sans', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+@layer base {
+    :root {
+        --background: 36 32% 97%;
+        --foreground: 0 0% 4%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 4%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 4%;
+        --primary: 0 0% 9%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 18 80% 82%;
+        --secondary-foreground: 0 0% 9%;
+        --muted: 36 25% 92%;
+        --muted-foreground: 0 0% 35%;
+        --accent: 18 80% 82%;
+        --accent-foreground: 0 0% 9%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 86%;
+        --input: 0 0% 86%;
+        --ring: 0 0% 9%;
+        --radius: 1rem;
+    }
+}
+
+@layer base {
+    * { @apply border-border; }
+    body { @apply bg-background text-foreground; }
+}
+
+/* Phone frame */
+.phone-frame {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 2px solid var(--nova-line);
+    border-radius: 38px;
+    box-shadow:
+        0 1px 0 rgba(0,0,0,0.04),
+        0 30px 80px -20px rgba(20, 12, 6, 0.18),
+        0 10px 30px -10px rgba(20, 12, 6, 0.10);
+    position: relative;
+    overflow: hidden;
+}
+
+.phone-shell {
+    min-height: 100dvh;
+    background: var(--nova-cream);
+    background-image:
+        radial-gradient(circle at 20% 8%, rgba(244,184,168,0.35), transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(192,38,211,0.10), transparent 45%);
+    padding: 24px 12px 24px;
+    display: flex;
+    align-items: stretch;
+}
+
+.peach-card {
+    background: var(--nova-peach);
+    border-radius: 14px;
+}
+.peach-card-soft {
+    background: var(--nova-peach-light);
+    border-radius: 14px;
+}
+
+.nova-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+}
+
+/* Notch */
+.notch {
+    width: 110px;
+    height: 26px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
+    margin: 0 auto;
+}
+
+/* Active nav tab pill */
+.nav-pill {
+    background: var(--nova-peach);
+    border-radius: 14px;
+}
+
+/* Plan card highlighted */
+.plan-highlight {
+    background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 45%, #c026d3 100%);
+    color: white;
+}
+
+/* Pay button */
+.pay-btn {
+    background: linear-gradient(180deg, #ffffff 0%, #efe6ff 100%);
+    color: #2a0e6b;
+    font-weight: 800;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; }
+
+/* underline animations */
+.link-line {
+    position: relative;
+}
+.link-line::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s ease;
+}
+.link-line:hover::after { transform: scaleX(1); }
+
+/* ticker */
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.ticker {
+    animation: ticker 28s linear infinite;
+}
+
+/* fade in */
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up .5s ease both; }
+
+/* selection */
+::selection { background: #0a0a0a; color: #faf7f2; }
