@@ -15,6 +15,41 @@ export default function Dashboard() {
   const [openRequest, setOpenRequest] = useState(false);
   const [reqType, setReqType] = useState("Article");
   const [reqBrief, setReqBrief] = useState("");
+  const [attachments, setAttachments] = useState([]);
+  const [linkInput, setLinkInput] = useState("");
+  const [showLinkBox, setShowLinkBox] = useState(false);
+  const fileRef = React.useRef(null);
+  const imageRef = React.useRef(null);
+  const videoRef = React.useRef(null);
+
+  const addFiles = (kind, files) => {
+    if (!files?.length) return;
+    const next = Array.from(files).map((f) => ({
+      id: `${Date.now()}_${f.name}`,
+      kind,
+      name: f.name,
+      size: f.size,
+    }));
+    setAttachments((a) => [...a, ...next]);
+    toast.success(`${next.length} ${kind} attached`);
+  };
+  const addLink = () => {
+    const url = linkInput.trim();
+    if (!url) return;
+    setAttachments((a) => [...a, { id: `${Date.now()}_link`, kind: "link", name: url }]);
+    setLinkInput("");
+    setShowLinkBox(false);
+    toast.success("Link attached");
+  };
+  const addVoice = () => {
+    setAttachments((a) => [...a, { id: `${Date.now()}_voice`, kind: "voice", name: `voice-note-${a.length + 1}.m4a` }]);
+    toast.success("Voice note attached");
+  };
+  const removeAttachment = (id) => setAttachments((a) => a.filter((x) => x.id !== id));
+
+  const closeSheet = () => {
+    setOpenRequest(false);
+  };
 
   useEffect(() => {
     axios.get(`${API}/plans`).then((r) => setPlans(r.data)).catch(() => {});
@@ -108,7 +143,7 @@ export default function Dashboard() {
       </div>
 
       {openRequest && (
-        <div className="sheet-backdrop" onClick={() => setOpenRequest(false)}>
+        <div className="sheet-backdrop" onClick={closeSheet}>
           <div
             data-testid="request-content-sheet"
             onClick={(e) => e.stopPropagation()}
@@ -144,13 +179,102 @@ export default function Dashboard() {
               value={reqBrief}
               onChange={(e) => setReqBrief(e.target.value)}
               placeholder="e.g. 800-word LinkedIn article on retail AI trends, energetic tone…"
-              rows={4}
+              rows={3}
               className="w-full surface rounded-2xl p-3 text-sm text-white placeholder:text-white/35 outline-none focus:ring-1 focus:ring-[var(--cred-lime)]/40 resize-none"
             />
 
-            <div className="flex items-center gap-2 mt-3">
+            {/* Attachment options */}
+            <div className="mt-3" data-testid="attachment-options">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[11px] uppercase tracking-[0.25em] text-white/45 font-mono flex items-center gap-1.5">
+                  <Paperclip size={12} /> attach
+                </span>
+                <span className="text-[11px] text-white/45 font-mono">{attachments.length} added</span>
+              </div>
+
+              <div className="flex gap-2" data-testid="attachment-row">
+                <AttachBtn
+                  testid="attach-file"
+                  icon={FileText}
+                  label="File"
+                  onClick={() => fileRef.current?.click()}
+                />
+                <AttachBtn
+                  testid="attach-image"
+                  icon={ImageIcon}
+                  label="Image"
+                  onClick={() => imageRef.current?.click()}
+                />
+                <AttachBtn
+                  testid="attach-video"
+                  icon={Video}
+                  label="Video"
+                  onClick={() => videoRef.current?.click()}
+                />
+                <AttachBtn
+                  testid="attach-voice"
+                  icon={Mic}
+                  label="Voice"
+                  onClick={addVoice}
+                />
+                <AttachBtn
+                  testid="attach-link"
+                  icon={Link2}
+                  label="Link"
+                  onClick={() => setShowLinkBox((s) => !s)}
+                  active={showLinkBox}
+                />
+              </div>
+
+              <input ref={fileRef} type="file" hidden multiple onChange={(e) => addFiles("file", e.target.files)} />
+              <input ref={imageRef} type="file" hidden multiple accept="image/*" onChange={(e) => addFiles("image", e.target.files)} />
+              <input ref={videoRef} type="file" hidden multiple accept="video/*" onChange={(e) => addFiles("video", e.target.files)} />
+
+              {showLinkBox && (
+                <div className="mt-2 flex gap-2" data-testid="link-input-row">
+                  <input
+                    data-testid="link-input"
+                    value={linkInput}
+                    onChange={(e) => setLinkInput(e.target.value)}
+                    placeholder="paste a url…"
+                    className="flex-1 surface rounded-xl px-3 py-2 text-sm text-white placeholder:text-white/35 outline-none focus:ring-1 focus:ring-[var(--cred-lime)]/40"
+                  />
+                  <button
+                    data-testid="link-add"
+                    onClick={addLink}
+                    className="cta-lime rounded-xl px-4 text-xs uppercase tracking-[0.2em]"
+                  >
+                    add
+                  </button>
+                </div>
+              )}
+
+              {attachments.length > 0 && (
+                <ul className="mt-3 space-y-1.5" data-testid="attachment-list">
+                  {attachments.map((a) => (
+                    <li
+                      key={a.id}
+                      data-testid={`attachment-${a.kind}`}
+                      className="flex items-center gap-2 surface rounded-xl px-3 py-2 text-xs text-white"
+                    >
+                      <AttachIcon kind={a.kind} />
+                      <span className="flex-1 truncate">{a.name}</span>
+                      <button
+                        onClick={() => removeAttachment(a.id)}
+                        className="w-6 h-6 rounded-full hover:bg-white/10 grid place-items-center text-white/55"
+                        aria-label="remove"
+                      >
+                        <X size={12} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 mt-4">
               <button
-                onClick={() => setOpenRequest(false)}
+                onClick={closeSheet}
                 className="flex-1 py-3 rounded-2xl border border-white/10 text-white/75 text-sm font-semibold hover:bg-white/[0.04]"
               >
                 Cancel
@@ -159,9 +283,10 @@ export default function Dashboard() {
                 data-testid="request-submit"
                 onClick={() => {
                   if (!reqBrief.trim()) return toast.error("Add a quick brief");
-                  toast.success("Request submitted · we'll be in touch");
+                  toast.success(`Request submitted · ${attachments.length} attachment${attachments.length === 1 ? "" : "s"}`);
                   setOpenRequest(false);
                   setReqBrief("");
+                  setAttachments([]);
                 }}
                 className="flex-1 cta-lime rounded-2xl py-3 text-sm tracking-[0.2em] uppercase"
               >
@@ -172,6 +297,33 @@ export default function Dashboard() {
         </div>
       )}
     </PhoneFrame>
+  );
+}
+
+function AttachBtn({ icon: Icon, label, onClick, testid, active }) {
+  return (
+    <button
+      data-testid={testid}
+      onClick={onClick}
+      className={`flex-1 flex flex-col items-center gap-1 py-2 rounded-xl text-[10px] font-bold transition ${
+        active
+          ? "bg-[var(--cred-lime)] text-black"
+          : "surface text-white/85 hover:bg-white/[0.06]"
+      }`}
+    >
+      <Icon size={16} />
+      {label}
+    </button>
+  );
+}
+
+function AttachIcon({ kind }) {
+  const map = { file: FileText, image: ImageIcon, video: Video, voice: Mic, link: Link2 };
+  const I = map[kind] || FileText;
+  return (
+    <span className="w-7 h-7 rounded-lg bg-[var(--cred-lime)] text-black grid place-items-center">
+      <I size={12} />
+    </span>
   );
 }
 
