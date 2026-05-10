@@ -71,6 +71,14 @@ class PortfolioItem(BaseModel):
     title: str
     category: str
     cover: str
+    link: str = ""
+
+class Client(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    short: str
+    industry: str
 
 class Discount(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -143,15 +151,33 @@ SEED_PLANS = [
 ]
 
 SEED_PORTFOLIO = [
-    {"id": "pf1", "title": "Lumen App", "category": "Mobile", "cover": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400"},
-    {"id": "pf2", "title": "Curate Web", "category": "Website", "cover": "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=400"},
-    {"id": "pf3", "title": "Northpeak ID", "category": "Branding", "cover": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=400"},
-    {"id": "pf4", "title": "Atlas Dash", "category": "SaaS", "cover": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400"},
-    {"id": "pf5", "title": "Verve Print", "category": "Print", "cover": "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400"},
-    {"id": "pf6", "title": "Quill AI", "category": "AI Tool", "cover": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400"},
-    {"id": "pf7", "title": "Pulse Mobile", "category": "Mobile", "cover": "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=400"},
-    {"id": "pf8", "title": "Forge Site", "category": "Website", "cover": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400"},
-    {"id": "pf9", "title": "Halo Mark", "category": "Branding", "cover": "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400"},
+    {"id": "pf1", "title": "Mad Academy", "category": "Education", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/61c1d4230750009.687ccb70b3a98.png", "link": "https://www.behance.net/gallery/230750009/Mad-Academy"},
+    {"id": "pf2", "title": "Radiance Clinics", "category": "Healthcare", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/584f06230749909.687ccad66863c.png", "link": "https://www.behance.net/gallery/230749909/Radiance-Clinics"},
+    {"id": "pf3", "title": "Epione Surgical Care", "category": "Healthcare", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/53027f230749843.687cca7daed4a.png", "link": "https://www.behance.net/gallery/230749843/Epione-Surgical-Care"},
+    {"id": "pf4", "title": "Rcrafter", "category": "Branding", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/bbe15c230749797.687cca41cb28b.png", "link": "https://www.behance.net/gallery/230749797/Rcrafter"},
+    {"id": "pf5", "title": "Dr Ram Pradeep Konakalla", "category": "Healthcare", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/b6140b230749455.687cc87be5c12.png", "link": "https://www.behance.net/gallery/230749455/Dr-Ram-Pradeep-Konakalla-Orthopedic-Surgeon"},
+    {"id": "pf6", "title": "Dr Anusha Ch", "category": "Healthcare", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/d392ba230749307.687cc7bec2f1f.png", "link": "https://www.behance.net/gallery/230749307/Dr-Anusha-Ch-Pediatrician"},
+    {"id": "pf7", "title": "Nirmala Hospitals", "category": "Healthcare", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/2b8174230749097.687cc6be01b09.png", "link": "https://www.behance.net/gallery/230749097/Nirmala-Hospitals"},
+    {"id": "pf8", "title": "Backyard Cafe", "category": "F&B", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/7a159a227861127.68486e23dc18e.png", "link": "https://www.behance.net/gallery/227861127/Backyard-Cafe"},
+    {"id": "pf9", "title": "Dr K Tarun Rao", "category": "Healthcare", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/a1a8f8224389907.Y3JvcCwyOTcwLDIzMjMsMCw2OTg.png", "link": "https://www.behance.net/gallery/224389907/Dr-K-Tarun-Rao-Orthopedic-Surgeon"},
+    {"id": "pf10", "title": "Surgeon For U", "category": "Healthcare", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/a258e2224389853.Y3JvcCwxODAwLDE0MDcsMCwyODU.png", "link": "https://www.behance.net/gallery/224389853/Surgeon-For-U"},
+    {"id": "pf11", "title": "Dharshana Wellness", "category": "Wellness", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/b522ec224383493.Y3JvcCwxNTYzLDEyMjIsMCwxNzA.png", "link": "https://www.behance.net/gallery/224383493/Dharshana-wellness-centre"},
+    {"id": "pf12", "title": "Fasco Academy", "category": "Education", "cover": "https://mir-s3-cdn-cf.behance.net/projects/404/b7819b224383403.Y3JvcCwzMzc1LDI2MzksMCwzNjc.png", "link": "https://www.behance.net/gallery/224383403/Fasco-Academy"},
+]
+
+SEED_CLIENTS = [
+    {"id": "c1", "name": "Mad Academy", "short": "MAD", "industry": "Education"},
+    {"id": "c2", "name": "Radiance Clinics", "short": "RAD", "industry": "Healthcare"},
+    {"id": "c3", "name": "Epione Surgical Care", "short": "EPI", "industry": "Healthcare"},
+    {"id": "c4", "name": "Rcrafter", "short": "RC", "industry": "Branding"},
+    {"id": "c5", "name": "Nirmala Hospitals", "short": "NRM", "industry": "Healthcare"},
+    {"id": "c6", "name": "Backyard Cafe", "short": "BYC", "industry": "F&B"},
+    {"id": "c7", "name": "Surgeon For U", "short": "SFU", "industry": "Healthcare"},
+    {"id": "c8", "name": "Dharshana Wellness", "short": "DRSH", "industry": "Wellness"},
+    {"id": "c9", "name": "Fasco Academy", "short": "FSC", "industry": "Education"},
+    {"id": "c10", "name": "Dr Tarun Rao", "short": "TRO", "industry": "Healthcare"},
+    {"id": "c11", "name": "Dr Anusha Ch", "short": "ACH", "industry": "Healthcare"},
+    {"id": "c12", "name": "Dr Ram Pradeep", "short": "RPK", "industry": "Healthcare"},
 ]
 
 SEED_PROFILE = {
@@ -209,6 +235,10 @@ async def get_profile():
 @api_router.get("/discounts", response_model=List[Discount])
 async def get_discounts():
     return SEED_DISCOUNTS
+
+@api_router.get("/clients", response_model=List[Client])
+async def get_clients():
+    return SEED_CLIENTS
 
 @api_router.post("/payments", response_model=PaymentResponse)
 async def create_payment(req: PaymentRequest):

@@ -45,10 +45,13 @@ export default function Portfolio() {
       <div className="flex-1 overflow-y-auto scrollbar-hide -mx-5 px-5 mt-4">
         {filtered[0] && (
           <a
+            href={filtered[0].link || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
             data-testid={`portfolio-feature-${filtered[0].id}`}
             className="block rounded-3xl overflow-hidden surface relative group"
           >
-            <img src={filtered[0].cover} alt="" className="w-full aspect-[4/3] object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+            <img src={filtered[0].cover} alt="" className="w-full aspect-[4/3] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between">
               <div>
@@ -62,24 +65,31 @@ export default function Portfolio() {
           </a>
         )}
 
-        <div className="grid grid-cols-3 gap-2 mt-3" data-testid="portfolio-grid">
+        <div className="grid grid-cols-2 gap-2.5 mt-3" data-testid="portfolio-grid">
           {filtered.slice(1).map((it) => (
-            <a key={it.id} data-testid={`portfolio-${it.id}`} className="block surface rounded-2xl overflow-hidden group">
-              <div className="aspect-square bg-white/5 overflow-hidden">
-                <img src={it.cover} alt="" className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+            <a
+              key={it.id}
+              href={it.link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid={`portfolio-${it.id}`}
+              className="block surface rounded-2xl overflow-hidden group relative"
+            >
+              <div className="aspect-[4/5] bg-white/5 overflow-hidden">
+                <img src={it.cover} alt="" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
               </div>
-              <div className="p-2">
-                <p className="text-[10px] font-bold leading-tight truncate text-white lowercase">{it.title}</p>
-                <p className="text-[9px] text-[var(--cred-lime)] font-mono">{it.category.toLowerCase()}</p>
+              <div className="absolute inset-x-0 bottom-0 p-2.5 bg-gradient-to-t from-black via-black/40 to-transparent">
+                <p className="text-[12px] font-extrabold leading-tight truncate text-white lowercase">{it.title}</p>
+                <p className="text-[9px] text-[var(--cred-lime)] font-mono uppercase tracking-[0.2em]">{it.category}</p>
               </div>
             </a>
           ))}
         </div>
 
         <div className="mt-5 grid grid-cols-3 gap-2 text-center" data-testid="portfolio-stats">
-          <Stat n="120+" l="projects" />
-          <Stat n="40" l="brands" />
-          <Stat n="14" l="industries" />
+          <Stat n={`${items.length}+`} l="projects" />
+          <Stat n="12+" l="brands" />
+          <Stat n={`${new Set(items.map(i=>i.category)).size}`} l="industries" />
         </div>
 
         <div className="h-3" />

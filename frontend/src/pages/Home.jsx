@@ -4,6 +4,7 @@ import PhoneFrame from "../components/PhoneFrame";
 import ProfileDrawer from "../components/ProfileDrawer";
 import DiscountsCarousel from "../components/DiscountsCarousel";
 import PaymentsSection from "../components/PaymentsSection";
+import ClientsMarquee from "../components/ClientsMarquee";
 import { Bell, Sparkles, ArrowUpRight, Quote, TrendingUp, Play } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -175,6 +176,8 @@ export default function Home() {
             ))}
           </div>
         </Section>
+
+        <ClientsMarquee />
 
         <Section title="founder's say" testid="founder-section">
           <div className="surface-elevated rounded-2xl p-5 relative overflow-hidden">
