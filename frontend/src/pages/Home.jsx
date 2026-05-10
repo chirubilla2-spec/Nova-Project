@@ -4,7 +4,6 @@ import PhoneFrame from "../components/PhoneFrame";
 import ProfileDrawer from "../components/ProfileDrawer";
 import DiscountsCarousel from "../components/DiscountsCarousel";
 import PaymentsSection from "../components/PaymentsSection";
-import PrimeHero from "../components/PrimeHero";
 import { Bell, Sparkles, ArrowUpRight, Quote, TrendingUp, Play } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -79,7 +78,6 @@ export default function Home() {
       </div>
 
       <div className="overflow-y-auto scrollbar-hide flex-1 -mx-5 px-5 mt-2">
-        <PrimeHero />
         <PaymentsSection />
         <DiscountsCarousel />
 
@@ -113,20 +111,32 @@ export default function Home() {
 
         <Section title="industries we serve" testid="industries-section">
           <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-5 px-5 snap-x">
-            {industries.map((it) => (
-              <a
-                key={it.id}
-                data-testid={`industry-${it.id}`}
-                className="industry-pill snap-start shrink-0"
-              >
-                <img src={it.image} alt={it.name} className="industry-pill-img" />
-                <div className="industry-pill-shade" />
-                <div className="industry-pill-body">
-                  <p className="industry-pill-name">{it.name}</p>
-                  <p className="industry-pill-tag">{it.tagline}</p>
-                </div>
-              </a>
-            ))}
+            {industries.map((it, i) => {
+              const badge = i === 0 ? "PRIME" : i === 1 ? "TRENDING" : i === 2 ? "NEW" : "";
+              return (
+                <a
+                  key={it.id}
+                  data-testid={`industry-${it.id}`}
+                  className="prime-card snap-start"
+                >
+                  <img src={it.image} alt={it.name} className="prime-card-img" />
+                  <div className="prime-card-shade" />
+                  {badge && (
+                    <span className={`prime-card-badge ${badge !== "PRIME" ? "muted" : ""}`}>
+                      {badge === "PRIME" && <span style={{ marginRight: 4 }}>★</span>}
+                      {badge}
+                    </span>
+                  )}
+                  <div className="prime-card-body">
+                    <p className="prime-card-title">{it.name}</p>
+                    <p className="prime-card-blurb">{it.tagline}</p>
+                  </div>
+                  <span className="prime-card-arrow">
+                    <Play size={14} fill="currentColor" />
+                  </span>
+                </a>
+              );
+            })}
           </div>
         </Section>
 

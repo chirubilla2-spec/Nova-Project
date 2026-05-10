@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PhoneFrame from "../components/PhoneFrame";
 import { useAuth } from "../context/AuthContext";
-import { TrendingUp, Receipt, Users, ArrowUpRight, Activity, Crown, ChevronRight } from "lucide-react";
+import { TrendingUp, Receipt, Users, ArrowUpRight, Activity, Crown, ChevronRight, MessageSquarePlus, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -11,6 +12,9 @@ export default function Dashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [plans, setPlans] = useState([]);
+  const [openRequest, setOpenRequest] = useState(false);
+  const [reqType, setReqType] = useState("Article");
+  const [reqBrief, setReqBrief] = useState("");
 
   useEffect(() => {
     axios.get(`${API}/plans`).then((r) => setPlans(r.data)).catch(() => {});
@@ -33,6 +37,22 @@ export default function Dashboard() {
       </div>
 
       <div className="flex-1 overflow-y-auto scrollbar-hide -mx-5 px-5 mt-5 space-y-3" data-testid="dashboard-body">
+        {/* Request content CTA */}
+        <button
+          data-testid="request-content-btn"
+          onClick={() => setOpenRequest(true)}
+          className="request-content-btn"
+        >
+          <span className="request-content-icon">
+            <MessageSquarePlus size={18} />
+          </span>
+          <span className="flex-1 text-left">
+            <span className="block font-display text-[18px] font-extrabold tracking-tight lowercase">request content</span>
+            <span className="block text-[11px] opacity-80 mt-0.5">brief in &lt; 60 sec · delivered fast</span>
+          </span>
+          <ArrowUpRight size={18} />
+        </button>
+
         {/* Stat tiles */}
         <div className="grid grid-cols-2 gap-2.5">
           <StatTile icon={Receipt} label="total spent" value={`$${totalSpent.toFixed(0)}`} sub={`${payments.length} payments`} />
@@ -86,6 +106,71 @@ export default function Dashboard() {
 
         <div className="h-2" />
       </div>
+
+      {openRequest && (
+        <div className="sheet-backdrop" onClick={() => setOpenRequest(false)}>
+          <div
+            data-testid="request-content-sheet"
+            onClick={(e) => e.stopPropagation()}
+            className="request-sheet fade-up"
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-9 h-9 rounded-xl bg-[var(--cred-lime)] text-black grid place-items-center">
+                <FileText size={16} />
+              </span>
+              <p className="font-display text-xl font-extrabold tracking-tight text-white lowercase">request content</p>
+            </div>
+            <p className="text-[12px] text-white/55 mb-4">tell us what you need — your strategist will pick it up within an hour.</p>
+
+            <div className="grid grid-cols-3 gap-2 mb-3" data-testid="request-types">
+              {["Article", "Design", "Reel", "Strategy", "Code", "Other"].map((t) => (
+                <button
+                  key={t}
+                  data-testid={`req-type-${t.toLowerCase()}`}
+                  onClick={() => setReqType(t)}
+                  className={`px-2 py-2 rounded-xl text-xs font-bold transition ${
+                    reqType === t
+                      ? "bg-[var(--cred-lime)] text-black"
+                      : "surface text-white hover:bg-white/[0.06]"
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+
+            <textarea
+              data-testid="request-brief"
+              value={reqBrief}
+              onChange={(e) => setReqBrief(e.target.value)}
+              placeholder="e.g. 800-word LinkedIn article on retail AI trends, energetic tone…"
+              rows={4}
+              className="w-full surface rounded-2xl p-3 text-sm text-white placeholder:text-white/35 outline-none focus:ring-1 focus:ring-[var(--cred-lime)]/40 resize-none"
+            />
+
+            <div className="flex items-center gap-2 mt-3">
+              <button
+                onClick={() => setOpenRequest(false)}
+                className="flex-1 py-3 rounded-2xl border border-white/10 text-white/75 text-sm font-semibold hover:bg-white/[0.04]"
+              >
+                Cancel
+              </button>
+              <button
+                data-testid="request-submit"
+                onClick={() => {
+                  if (!reqBrief.trim()) return toast.error("Add a quick brief");
+                  toast.success("Request submitted · we'll be in touch");
+                  setOpenRequest(false);
+                  setReqBrief("");
+                }}
+                className="flex-1 cta-lime rounded-2xl py-3 text-sm tracking-[0.2em] uppercase"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </PhoneFrame>
   );
 }
