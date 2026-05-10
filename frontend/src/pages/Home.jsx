@@ -99,7 +99,6 @@ export default function Home() {
                     {s.badge}
                   </span>
                 )}
-                <span className="prime-card-watermark">nova</span>
                 <div className="prime-card-body">
                   <p className="prime-card-title">{s.title}</p>
                   <p className="prime-card-blurb">{s.blurb}</p>
@@ -195,7 +194,6 @@ export default function Home() {
                 <img src={b.cover} alt={b.title} className="prime-card-img" />
                 <div className="prime-card-shade" />
                 <span className={`prime-card-badge ${i === 0 ? "" : "muted"}`}>{b.tag}</span>
-                <span className="prime-card-watermark">nova</span>
                 <div className="prime-card-body">
                   <p className="prime-card-title" style={{ fontSize: 18 }}>{b.title}</p>
                   <p className="prime-card-blurb line-clamp-1">{b.excerpt}</p>

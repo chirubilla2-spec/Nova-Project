@@ -11,6 +11,7 @@ import Explore from "@/pages/Explore";
 import Plans from "@/pages/Plans";
 import Portfolio from "@/pages/Portfolio";
 import AIChat from "@/pages/AIChat";
+import Dashboard from "@/pages/Dashboard";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/plans" element={<Plans />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/ai" element={<AIChat />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

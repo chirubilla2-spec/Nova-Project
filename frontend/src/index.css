@@ -535,6 +535,36 @@ body {
 /* Wider variant for blog (16:10) */
 .prime-card-wide { width: 80%; aspect-ratio: 16/10; }
 
+/* Floating AI button */
+.ai-fab {
+    position: absolute;
+    right: 18px;
+    bottom: 92px;
+    z-index: 40;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #fff1a1 0%, #ffd93d 50%, #f5b61b 100%);
+    color: #0a0a0e;
+    display: grid; place-items: center;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.5) inset,
+        0 -2px 8px rgba(245,182,27,0.6) inset,
+        0 18px 36px -8px rgba(255,217,61,0.55);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.ai-fab:hover { transform: translateY(-2px) scale(1.04); }
+.ai-fab:active { transform: translateY(0) scale(0.98); }
+.ai-fab-glow {
+    position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255,217,61,0.55), transparent 70%);
+    filter: blur(8px);
+    opacity: 0.85;
+    animation: glow-pulse 2.4s ease-in-out infinite;
+}
+
 /* shiny line */
 .divider-shine {
     height: 1px;

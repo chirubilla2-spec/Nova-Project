@@ -25,9 +25,8 @@ export default function PrimeHero() {
       <div className="prime-hero-orb" />
 
       <div className="prime-hero-top">
-        <div className="prime-hero-mark">
+        <div className="prime-hero-mark" aria-label="Membership">
           <Crown size={14} className="text-[var(--cred-lime)]" />
-          <span>nova prime</span>
         </div>
         <span className="prime-hero-tier">membership</span>
       </div>

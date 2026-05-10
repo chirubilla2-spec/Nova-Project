@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Home as HomeIcon, Compass, Sparkles, CreditCard, LayoutGrid } from "lucide-react";
+import { Home as HomeIcon, Compass, LayoutDashboard, CreditCard, LayoutGrid } from "lucide-react";
 
 const items = [
   { to: "/home", icon: HomeIcon, label: "Home", testid: "nav-home" },
   { to: "/explore", icon: Compass, label: "Explore", testid: "nav-explore" },
-  { to: "/ai", icon: Sparkles, label: "AI", testid: "nav-ai" },
+  { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard", testid: "nav-dashboard" },
   { to: "/plans", icon: CreditCard, label: "Plans", testid: "nav-plans" },
   { to: "/portfolio", icon: LayoutGrid, label: "Portfolio", testid: "nav-portfolio" },
 ];
