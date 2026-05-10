@@ -4,7 +4,8 @@ import PhoneFrame from "../components/PhoneFrame";
 import ProfileDrawer from "../components/ProfileDrawer";
 import DiscountsCarousel from "../components/DiscountsCarousel";
 import PaymentsSection from "../components/PaymentsSection";
-import { Bell, Sparkles, ArrowUpRight, Quote, TrendingUp } from "lucide-react";
+import PrimeHero from "../components/PrimeHero";
+import { Bell, Sparkles, ArrowUpRight, Quote, TrendingUp, Play } from "lucide-react";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -78,23 +79,35 @@ export default function Home() {
       </div>
 
       <div className="overflow-y-auto scrollbar-hide flex-1 -mx-5 px-5 mt-2">
+        <PrimeHero />
         <PaymentsSection />
         <DiscountsCarousel />
 
         <Section title="browse services" cta="see all" testid="services-section">
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-1 -mx-5 px-5 snap-x">
-            {services.map((s, i) => (
-              <button
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 -mx-5 px-5 snap-x">
+            {services.map((s) => (
+              <a
                 key={s.id}
                 data-testid={`service-${s.id}`}
-                className="shrink-0 snap-start w-52 surface rounded-3xl p-5 text-left hover:-translate-y-0.5 transition-transform"
+                className="prime-card snap-start"
               >
-                <div className={`w-12 h-12 rounded-2xl grid place-items-center mb-4 ${i % 3 === 0 ? "bg-[var(--cred-lime)] text-black" : "bg-white/10 text-white"}`}>
-                  <Sparkles size={20} />
+                <img src={s.image} alt={s.title} className="prime-card-img" />
+                <div className="prime-card-shade" />
+                {s.badge && (
+                  <span className={`prime-card-badge ${s.badge !== "PRIME" ? "muted" : ""}`}>
+                    {s.badge === "PRIME" && <span style={{ marginRight: 4 }}>★</span>}
+                    {s.badge}
+                  </span>
+                )}
+                <span className="prime-card-watermark">nova</span>
+                <div className="prime-card-body">
+                  <p className="prime-card-title">{s.title}</p>
+                  <p className="prime-card-blurb">{s.blurb}</p>
                 </div>
-                <p className="text-[18px] font-extrabold leading-tight text-white">{s.title}</p>
-                <p className="text-[12px] text-white/55 mt-2 leading-snug">{s.blurb}</p>
-              </button>
+                <span className="prime-card-arrow">
+                  <Play size={14} fill="currentColor" />
+                </span>
+              </a>
             ))}
           </div>
         </Section>
@@ -172,21 +185,24 @@ export default function Home() {
         </Section>
 
         <Section title="blogs & case studies" testid="blogs-section">
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-5 px-5 pb-1 snap-x">
-            {blogs.map((b) => (
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-5 px-5 pb-2 snap-x">
+            {blogs.map((b, i) => (
               <a
                 key={b.id}
                 data-testid={`blog-${b.id}`}
-                className="shrink-0 snap-start w-[64%] surface rounded-2xl overflow-hidden hover:-translate-y-0.5 transition-transform"
+                className="prime-card prime-card-wide snap-start"
               >
-                <div className="aspect-[16/10] bg-white/5 overflow-hidden">
-                  {b.cover && <img src={b.cover} alt="" className="w-full h-full object-cover opacity-90" />}
+                <img src={b.cover} alt={b.title} className="prime-card-img" />
+                <div className="prime-card-shade" />
+                <span className={`prime-card-badge ${i === 0 ? "" : "muted"}`}>{b.tag}</span>
+                <span className="prime-card-watermark">nova</span>
+                <div className="prime-card-body">
+                  <p className="prime-card-title" style={{ fontSize: 18 }}>{b.title}</p>
+                  <p className="prime-card-blurb line-clamp-1">{b.excerpt}</p>
                 </div>
-                <div className="p-3">
-                  <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--cred-lime)] font-mono">{b.tag}</p>
-                  <p className="text-[14px] font-extrabold leading-tight mt-1 line-clamp-2 text-white">{b.title}</p>
-                  <p className="text-[11px] text-white/55 mt-1.5 line-clamp-2 leading-snug">{b.excerpt}</p>
-                </div>
+                <span className="prime-card-arrow">
+                  <Play size={14} fill="currentColor" />
+                </span>
               </a>
             ))}
           </div>

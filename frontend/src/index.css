@@ -332,6 +332,209 @@ body {
     font-size: 12px; color: rgba(0,0,0,0.55);
 }
 
+/* ============================================================
+   AMAZON PRIME-INSPIRED CARDS
+   ============================================================ */
+
+/* Prime membership hero card */
+.prime-hero {
+    position: relative;
+    border-radius: 26px;
+    padding: 22px 20px;
+    color: #f4f1ea;
+    overflow: hidden;
+    background:
+        radial-gradient(120% 100% at 0% 0%, rgba(255,217,61,0.18), transparent 55%),
+        linear-gradient(135deg, #002a3a 0%, #003e57 40%, #00253a 100%);
+    border: 1px solid rgba(255,217,61,0.20);
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.06) inset,
+        0 30px 70px -25px rgba(0, 75, 110, 0.55);
+}
+.prime-hero-pattern {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0.7; pointer-events: none;
+}
+.prime-hero-orb {
+    position: absolute; right: -50px; top: -50px;
+    width: 180px; height: 180px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255,217,61,0.55), transparent 60%);
+    filter: blur(28px);
+    pointer-events: none;
+}
+.prime-hero-top {
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 18px;
+}
+.prime-hero-mark {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,0,0,0.35);
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.10);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+}
+.prime-hero-tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+}
+.prime-hero-title {
+    position: relative;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: 30px;
+    line-height: 1;
+    text-transform: lowercase;
+}
+.prime-hero-benefits {
+    position: relative;
+    margin-top: 14px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px 14px;
+    list-style: none; padding: 0;
+}
+.prime-hero-benefits li {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: rgba(244,241,234,0.85);
+}
+.prime-hero-foot {
+    position: relative;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(255,255,255,0.16);
+    display: flex; align-items: center; justify-content: space-between;
+}
+.prime-hero-amount {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 1;
+}
+.prime-hero-trial {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+.prime-hero-cta {
+    background: linear-gradient(180deg, #fff1a1 0%, #ffd93d 50%, #f5b61b 100%);
+    color: #003049;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    display: inline-flex; align-items: center; gap: 6px;
+    box-shadow:
+        0 1px 0 rgba(255,255,255,0.4) inset,
+        0 14px 28px -10px rgba(255,217,61,0.55);
+    transition: transform .25s ease;
+}
+.prime-hero-cta:hover { transform: translateY(-1px); }
+
+/* Prime Video poster cards */
+.prime-card {
+    position: relative;
+    flex-shrink: 0;
+    width: 64%;
+    aspect-ratio: 3/4;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #14141a;
+    cursor: pointer;
+    transition: transform .35s ease, box-shadow .35s ease;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7);
+}
+.prime-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 40px 80px -20px rgba(0,0,0,0.85); }
+.prime-card-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .9s ease;
+}
+.prime-card:hover .prime-card-img { transform: scale(1.06); }
+.prime-card-shade {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,14,0.0) 30%, rgba(10,10,14,0.3) 55%, rgba(10,10,14,0.95) 100%);
+}
+.prime-card-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: linear-gradient(180deg, #fff1a1 0%, #ffd93d 100%);
+    color: #0a0a0e;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 16px -4px rgba(255,217,61,0.5);
+}
+.prime-card-badge.muted {
+    background: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    box-shadow: none;
+}
+.prime-card-watermark {
+    position: absolute; top: 12px; right: 12px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: rgba(255,217,61,0.85);
+    text-transform: lowercase;
+}
+.prime-card-body {
+    position: absolute; left: 14px; right: 14px; bottom: 14px;
+    color: #fff;
+}
+.prime-card-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: 20px;
+    line-height: 1.05;
+    text-transform: lowercase;
+}
+.prime-card-blurb {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 4px;
+}
+.prime-card-arrow {
+    position: absolute; right: 12px; bottom: 12px;
+    width: 36px; height: 36px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #fff1a1 0%, #ffd93d 100%);
+    color: #0a0a0e;
+    display: grid; place-items: center;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform .35s ease, opacity .35s ease;
+    box-shadow: 0 10px 24px -8px rgba(255,217,61,0.55);
+}
+.prime-card:hover .prime-card-arrow { opacity: 1; transform: translateY(0); }
+
+/* Wider variant for blog (16:10) */
+.prime-card-wide { width: 80%; aspect-ratio: 16/10; }
+
 /* shiny line */
 .divider-shine {
     height: 1px;
